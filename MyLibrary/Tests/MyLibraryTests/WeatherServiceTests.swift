@@ -1,7 +1,7 @@
 
 import XCTest
 @testable import MyLibrary
-//@testable import struct MyLibrary.Weather
+@testable import struct MyLibrary.Weather
 
 final class WeatherServiceTests: XCTestCase {
 
