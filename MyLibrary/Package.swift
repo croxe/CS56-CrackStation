@@ -16,19 +16,17 @@ let package = Package(
         .library(
             name: "MyLibrary",
             targets: ["MyLibrary"]),
-        .library(
-            name: "WeatherService",
-            targets: ["MyLibrary"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.5.0"))
+        .package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "3.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "MyLibrary",
-            dependencies: ["Alamofire"]),
+            dependencies: [
+              .product(name: "Crypto", package: "swift-crypto")]),
         .testTarget(
             name: "MyLibraryTests",
             dependencies: ["MyLibrary"]),
