@@ -31,7 +31,7 @@ public class CrackStation {
                 let temp:String = preLetters + String(UnicodeScalar(character)!)
                 guard let data = temp.data(using: .utf8) else {return}
                 //print(temp)
-                let digest = Insecure.SHA1.hash(data: data)
+                let digest = SHA256.hash(data: data)
                 myStationProtocol[digest.hexStr] = temp
                 recurGenDict(preLetters: temp, limit: limit - 1)
             }
