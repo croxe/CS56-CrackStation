@@ -13,32 +13,11 @@ public class CrackStation {
     ]
     
     public init() {
-        // Get dictionary in document directory
-        let paths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        let fileName = "hash.txt"
-
-        let URL = URL(fileURLWithPath: fileName, relativeTo: documentsDirectory)
-        print(URL)
-        do{
-            let data = try Data(contentsOf: URL)
-            myStationProtocol = try PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as! [String:String] 
-        }catch{
-            print(error.localizedDescription)
-        }
-        
         print(myStationProtocol.count)
         if(myStationProtocol.count == 0) {
             recurGenDict(preLetters: "", limit: 3)
         }
         
-        // Save computed hashes into file
-        do{
-            try FileManager.default.createDirectory(at: documentsDirectory, withIntermediateDirectories: true)
-            try myStationProtocol.writeToURL(url: URL)
-        }catch{
-            print(error.localizedDescription)
-        }
     }
 
     public func crack(hash: String) -> String? {
