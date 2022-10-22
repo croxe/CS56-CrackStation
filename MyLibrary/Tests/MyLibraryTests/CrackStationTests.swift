@@ -24,7 +24,7 @@ final class CrackStationTests: XCTestCase {
         ]
 
         //Then
-        for i in 0...5 {
+        for i in 0...4 {
             let tempPassword = crackstation.crack(hash: hashList[i])
             XCTAssert(passwordList[i] == tempPassword)
         }
