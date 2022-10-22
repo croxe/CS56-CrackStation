@@ -30,4 +30,31 @@ final class CrackStationTests: XCTestCase {
         }
     }
 
+    func testCrackStationPassword2() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let passwordList = [
+            "Zz",
+            "PT",
+            "u99",
+            "!2o",
+            "???"
+        ]
+
+        let hashList = [
+            "da8517a4b9180acb6987e8e7582b808fc64b631cd892ed36685ded6816f60125",
+            "169b032adf2ab80f3bdffbdf14358d9d72565fad7708f65c65cb4d7918a4ffb2",
+            "a2ca3270b8497a88bb4dc6659f077cfcaf94e8624b83823cb4d5b99bf957ac67",
+            "d852a96ecd82ea35fba1990c9c47831b532f7ed5a59ac43ca8d1bcdbe03d6220",
+            "a03b221c6c6eae7122ca51695d456d5222e524889136394944b2f9763b483615",
+        ]
+
+        //Then
+        for i in 0...4 {
+            let tempPassword = crackstation.crack(hash: hashList[i])
+            XCTAssert(passwordList[i] == tempPassword)
+        }
+    }
 }
