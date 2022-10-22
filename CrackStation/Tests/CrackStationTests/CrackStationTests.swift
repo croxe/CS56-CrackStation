@@ -1,5 +1,5 @@
 import XCTest
-import MyLibrary
+import CrackStation
 
 final class CrackStationTests: XCTestCase {
     func testCrackStationPassword() {
