@@ -2,6 +2,92 @@ import XCTest
 import CrackStation
 
 final class CrackStationTests: XCTestCase {
+    /* For SHA1 */
+    func testCrackStationPasswordOneDigit() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "86f7e437faa5a7fce15d1ddcb9eaeaea377667b8")
+        print(password)
+        // Then
+        XCTAssert(password == "a")
+        
+        // when
+        let password2 = crackstation.decrypt(shaHash: "902ba3cda1883801594b6e1b452790cc53948fda")
+        print(password2)
+        // Then
+        XCTAssert(password2 == "7")
+    }
+
+    func testCrackStationPasswordTwoDigits() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "8ee51caaa2c2f4ee2e5b4b7ef5a89db7df1068d7")
+
+        // Then
+        XCTAssert(password == "92")
+    }
+
+    func testCrackStationPasswordTwoDigits2() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "801c34269f74ed383fc97de33604b8a905adb635")
+
+        // Then
+        XCTAssert(password == "AA")
+    }
+
+    func testCrackStationPasswordThreeDigits1() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "4e3b829410608130547609a3e6ba89513d8013d5")
+
+        // Then
+        XCTAssert(password == "eta")
+    }
+
+    func testCrackStationPasswordThreeDigits2() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "893a066695ecc655794a2d3f7b03f11a969fede3")
+
+        // Then
+        XCTAssert(password == "0i1")
+    }
+
+    func testCrackStationPasswordThreeDigits3() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "59785da3dbfcccd392e34208e69f58a89ef198d2")
+
+        // Then
+        XCTAssert(password == "U1D")
+    }
+
+    func testCrackStationPasswordThreeDigits4() {
+        // Given
+        let crackstation = CrackStation()
+
+        // When
+        let password = crackstation.decrypt(shaHash: "7560bcbf2a7b023a0643a9252f8c76353972e8c1")
+
+        // Then
+        XCTAssert(password == "49p")
+    }
+
+
+    /* For SHA256
     func testCrackStationPassword() {
         // Given
         let crackstation = CrackStation()
@@ -15,7 +101,7 @@ final class CrackStationTests: XCTestCase {
             "A?0"
         ]
 
-        let hashList = [
+        let shaHashList = [
             "961b6dd3ede3cb8ecbaacbd68de040cd78eb2ed5889130cceb4c49268ea4d506",
             "9834876dcfb05cb167a5c24953eba58c4ac89b1adf57f28f2f9d09af107ee8f0",
             "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
@@ -25,7 +111,7 @@ final class CrackStationTests: XCTestCase {
 
         //Then
         for i in 0...4 {
-            let tempPassword = crackstation.crack(hash: hashList[i])
+            let tempPassword = crackstation.decrypt(shashaHash: shaHashList[i])
             XCTAssert(passwordList[i] == tempPassword)
         }
     }
@@ -43,7 +129,7 @@ final class CrackStationTests: XCTestCase {
             "???"
         ]
 
-        let hashList = [
+        let shaHashList = [
             "da8517a4b9180acb6987e8e7582b808fc64b631cd892ed36685ded6816f60125",
             "169b032adf2ab80f3bdffbdf14358d9d72565fad7708f65c65cb4d7918a4ffb2",
             "a2ca3270b8497a88bb4dc6659f077cfcaf94e8624b83823cb4d5b99bf957ac67",
@@ -53,8 +139,9 @@ final class CrackStationTests: XCTestCase {
 
         //Then
         for i in 0...4 {
-            let tempPassword = crackstation.crack(hash: hashList[i])
+            let tempPassword = crackstation.decrypt(shashaHash: shaHashList[i])
             XCTAssert(passwordList[i] == tempPassword)
         }
     }
+    */
 }
