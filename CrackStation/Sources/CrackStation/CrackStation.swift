@@ -1,18 +1,18 @@
 import Crypto
 import Foundation
 
-public class CrackStation {
+public class CrackStation: Decrypter {
     var myStationProtocol: [String : String] = [:]
     
     let ranges = [
         UInt32("a") ..< (UInt32("z") + 1),
         UInt32("A") ..< (UInt32("Z") + 1),
-        UInt32("0") ..< (UInt32("9") + 1),
-        UInt32("!") ..< (UInt32("!") + 1),
-        UInt32("?") ..< (UInt32("?") + 1)
+        UInt32("0") ..< (UInt32("9") + 1)//,
+        //UInt32("!") ..< (UInt32("!") + 1),
+        //UInt32("?") ..< (UInt32("?") + 1)
     ]
     
-    public init() {
+    public required init() {
         // Get dictionary in document directory
         let paths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -29,7 +29,7 @@ public class CrackStation {
         
         print(myStationProtocol.count)
         if(myStationProtocol.count == 0) {
-            recurGenDict(preLetters: "", limit: 3)
+            recurGenDict(prefixs: "", digits: 4)
         }
         
         // Save computed hashes into file
@@ -41,20 +41,21 @@ public class CrackStation {
         }
     }
 
-    public func crack(hash: String) -> String? {
-        return myStationProtocol[hash.uppercased()]
+    public func decrypt(shaHash: String) -> String? {
+        return myStationProtocol[shaHash.uppercased()]
     }
 
-    public func recurGenDict(preLetters: String, limit: Int) {
-        if(limit == 0){ return }
+    public func recurGenDict(prefixs: String, digits: Int) {
+        if(digits == 0){ return }
         for range in ranges {
             for character in range {
-                let temp:String = preLetters + String(UnicodeScalar(character)!)
+                let temp:String = prefixs + String(UnicodeScalar(character)!)
                 guard let data = temp.data(using: .utf8) else {return}
                 //print(temp)
-                let digest = SHA256.hash(data: data)
+                //let digest = SHA256.hash(data: data)
+                let digest = Insecure.SHA1.hash(data: data)
                 myStationProtocol[digest.hexStr] = temp
-                recurGenDict(preLetters: temp, limit: limit - 1)
+                recurGenDict(prefixs: temp, digits: digits - 1)
             }
         }
     }
