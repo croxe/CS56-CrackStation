@@ -29,7 +29,7 @@ public class CrackStation: Decrypter {
         
         print(myStationProtocol.count)
         if(myStationProtocol.count == 0) {
-            recurGenDict(prefixs: "", digits: 4)
+            recurGenDict(prefixs: "", digits: 3)
         }
         
         // Save computed hashes into file
