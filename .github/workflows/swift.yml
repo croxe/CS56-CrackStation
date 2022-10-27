@@ -18,9 +18,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build
       run: |
-        cd CrackStation
         swift build -v
     - name: Run tests
       run: |
-        cd CrackStation
         swift test -v

@@ -1,2 +1,9 @@
 cs561.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 cs561.xcworkspace/xcuserdata/*.xcuserdatad/*
+.DS_Store
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+DerivedData/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata

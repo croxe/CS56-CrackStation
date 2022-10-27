@@ -1,6 +1,6 @@
 # cs561-CrackStation
 
-The PoC v1:
+### The PoC v1:
 
 Create a prototype that be able to generate mapping between hash and password, I use dictionary to save those computed hash. 
 
@@ -8,10 +8,31 @@ Consider the possible of exntension, I made my generator takes input from one di
 
 Meanwhile, I setup some tests for SHA1.
 
-The PoC v2:
+### The PoC v2:
 
 Change the SHA1 to SHA2, and update all tests.
 
-The MVP:
+### The MVP:
 
 The crackStation now will be able to save computed hash dictionary into local disk, and each time when the CrackStation inits, it will check the local disk first.
+
+
+# The API
+
+This is an API description of this package.
+
+### init()
+
+This initializes the CrackStation as an instance.
+
+### decypher(hash :String) -> password: String
+
+When you calling api decypher from CrackStation, the decypher will return cracked password.
+
+### recurGenDict(prefix: String, digits: Int)
+
+Using permutation recursively generate random password that according to the "digits" parameter. The limit parameter will tell the function how many digits would have to be calculated up to. The prefix is a String can be inserted in front of generated password. For instance, if one know the password starts from "paste"; it would be best to try related password that append to this prefix.
+
+### .caches Directory
+
+One could put his or her dictionary that in .plist format under \.caches. By doing this, one can use their customized dictionary to decypher one password. 
