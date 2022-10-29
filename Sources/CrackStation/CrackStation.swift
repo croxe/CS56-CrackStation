@@ -7,9 +7,9 @@ public class CrackStation: Decrypter {
     let ranges = [
         UInt32("a") ..< (UInt32("z") + 1),
         UInt32("A") ..< (UInt32("Z") + 1),
-        UInt32("0") ..< (UInt32("9") + 1)//,
-        //UInt32("!") ..< (UInt32("!") + 1),
-        //UInt32("?") ..< (UInt32("?") + 1)
+        UInt32("0") ..< (UInt32("9") + 1),
+        UInt32("!") ..< (UInt32("!") + 1),
+        UInt32("?") ..< (UInt32("?") + 1)
     ]
     
     public required init() {
@@ -52,8 +52,8 @@ public class CrackStation: Decrypter {
                 let temp:String = prefixs + String(UnicodeScalar(character)!)
                 guard let data = temp.data(using: .utf8) else {return}
                 //print(temp)
-                //let digest = SHA256.hash(data: data)
-                let digest = Insecure.SHA1.hash(data: data)
+                let digest = SHA256.hash(data: data)
+                //let digest = Insecure.SHA1.hash(data: data)
                 myStationProtocol[digest.hexStr] = temp
                 recurGenDict(prefixs: temp, digits: digits - 1)
             }

@@ -1,6 +1,8 @@
 # cs561-CrackStation
 
-### The PoC v1:
+This library is called CrackStation; it takes SHA1, SHA256 hash as input, and output the password that corresponded to the hash. By using this library, one can break simple hashed password from 1 to 3 digits length.
+
+### 1.0.1 (The PoC v1):
 
 Create a prototype that be able to generate mapping between hash and password, I use dictionary to save those computed hash. 
 
@@ -8,13 +10,13 @@ Consider the possible of exntension, I made my generator takes input from one di
 
 Meanwhile, I setup some tests for SHA1.
 
-### The PoC v2:
+### 2.0.0 (The PoC v2):
 
-Change the SHA1 to SHA2, and update all tests.
+Change the SHA1 to SHA256, and update all tests. Now decypher() only takes SHA256.
 
 ### The MVP:
 
-The crackStation now will be able to save computed hash dictionary into local disk, and each time when the CrackStation inits, it will check the local disk first.
+The CrackStation now will be able to save computed hash dictionary into local disk, and each time when the CrackStation inits, it will check the local disk first.
 
 
 # The API
@@ -25,7 +27,7 @@ This is an API description of this package.
 
 This initializes the CrackStation as an instance.
 
-### decypher(hash :String) -> password: String
+### decypher(shaHash :String) -> password: String
 
 When you calling api decypher from CrackStation, the decypher will return cracked password.
 

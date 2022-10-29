@@ -2,7 +2,7 @@ import XCTest
 import CrackStation
 
 final class CrackStationTests: XCTestCase {
-    /* For SHA1 */
+    /* For SHA1 
     func testCrackStationPasswordOneDigit() {
         // Given
         let crackstation = CrackStation()
@@ -85,9 +85,9 @@ final class CrackStationTests: XCTestCase {
         // Then
         XCTAssert(password == "49p")
     }
+*/
 
-
-    /* For SHA256
+    /* For SHA256*/
     func testCrackStationPassword() {
         // Given
         let crackstation = CrackStation()
@@ -111,7 +111,7 @@ final class CrackStationTests: XCTestCase {
 
         //Then
         for i in 0...4 {
-            let tempPassword = crackstation.decrypt(shashaHash: shaHashList[i])
+            let tempPassword = crackstation.decrypt(shaHash: shaHashList[i])
             XCTAssert(passwordList[i] == tempPassword)
         }
     }
@@ -139,9 +139,9 @@ final class CrackStationTests: XCTestCase {
 
         //Then
         for i in 0...4 {
-            let tempPassword = crackstation.decrypt(shashaHash: shaHashList[i])
+            let tempPassword = crackstation.decrypt(shaHash: shaHashList[i])
             XCTAssert(passwordList[i] == tempPassword)
         }
     }
-    */
+    
 }
