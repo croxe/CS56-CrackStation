@@ -2,77 +2,34 @@ import Crypto
 import Foundation
 
 public class CrackStation: Decrypter {
-    var myStationProtocol: [String : String] = [:]
-    
-    let ranges = [
-        UInt32("a") ..< (UInt32("z") + 1),
-        UInt32("A") ..< (UInt32("Z") + 1),
-        UInt32("0") ..< (UInt32("9") + 1),
-        UInt32("!") ..< (UInt32("!") + 1),
-        UInt32("?") ..< (UInt32("?") + 1)
-    ]
-    
-    public required init() {
-        // Get dictionary in document directory
-        let paths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        let fileName = "hash.txt"
+    var passwords: [String : String] = [:]
 
-        let URL = URL(fileURLWithPath: fileName, relativeTo: documentsDirectory)
-        print(URL)
+    public required init() {
+        // The file format is apple's plist
+        let fileName = "hash.plist"
+
+        // URL will take the filename and add current directory
+        let URL = URL(fileURLWithPath: fileName)
+        
+        // Try to read the file from current directory
         do{
             let data = try Data(contentsOf: URL)
-            myStationProtocol = try PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as! [String:String] 
+
+            // Check the nil type after read file from disk, and ensure the data is not corrupted
+            let tempPasswords = try PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String:String]
+            if(tempPasswords == nil) {throw "Data corrupted"}
+            else {self.passwords = tempPasswords ?? [:]}
         }catch{
-            print(error.localizedDescription)
-        }
-        
-        print(myStationProtocol.count)
-        if(myStationProtocol.count == 0) {
-            recurGenDict(prefixs: "", digits: 3)
-        }
-        
-        // Save computed hashes into file
-        do{
-            try FileManager.default.createDirectory(at: documentsDirectory, withIntermediateDirectories: true)
-            try myStationProtocol.writeToURL(url: URL)
-        }catch{
+            // Print error if the file not founds
             print(error.localizedDescription)
         }
     }
 
+    // look up the password dictionary and return the password
     public func decrypt(shaHash: String) -> String? {
-        return myStationProtocol[shaHash.uppercased()]
-    }
-
-    public func recurGenDict(prefixs: String, digits: Int) {
-        if(digits == 0){ return }
-        for range in ranges {
-            for character in range {
-                let temp:String = prefixs + String(UnicodeScalar(character)!)
-                guard let data = temp.data(using: .utf8) else {return}
-                //print(temp)
-                let digest = SHA256.hash(data: data)
-                //let digest = Insecure.SHA1.hash(data: data)
-                myStationProtocol[digest.hexStr] = temp
-                recurGenDict(prefixs: temp, digits: digits - 1)
-            }
-        }
+        return passwords[shaHash.uppercased()]
     }
 }
 
-extension Dictionary where Key: Encodable, Value: Encodable {
-    func writeToURL(url: URL) throws {
-        // archive data
-        let data = try PropertyListEncoder().encode(self)
-        try data.write(to: url)
-    }
-}
-
-extension Digest {
-    var bytes: [UInt8] { Array(makeIterator()) }
-    var data: Data { Data(bytes) }
-    var hexStr: String {
-        bytes.map { String(format: "%02X", $0) }.joined()
-    }
-}
+// add extension to be able to print in throw
+extension String: Error {}
