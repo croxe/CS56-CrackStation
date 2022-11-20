@@ -2,20 +2,20 @@ import XCTest
 import CrackStation
 
 final class CrackStationTests: XCTestCase {
-    /* For SHA1 
+    /* For SHA1 */
     func testCrackStationPasswordOneDigit() {
         // Given
         let crackstation = CrackStation()
 
         // When
         let password = crackstation.decrypt(shaHash: "86f7e437faa5a7fce15d1ddcb9eaeaea377667b8")
-        print(password)
+
         // Then
         XCTAssert(password == "a")
         
         // when
         let password2 = crackstation.decrypt(shaHash: "902ba3cda1883801594b6e1b452790cc53948fda")
-        print(password2)
+
         // Then
         XCTAssert(password2 == "7")
     }
@@ -85,7 +85,7 @@ final class CrackStationTests: XCTestCase {
         // Then
         XCTAssert(password == "49p")
     }
-*/
+
 
     /* For SHA256*/
     func testCrackStationPassword() {
