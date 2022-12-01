@@ -1,0 +1,30 @@
+{
+    "mystore": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "hash": {
+                        "S": "john@example.com"
+                    },
+                    "password": {
+                        "S": "2020-03-9T08:12Z"
+				    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "hash": {
+                        "S": "john@example.com"
+                    },
+                    "password": {
+                        "S": "2020-03-9T08:12Z"
+				    }
+                }
+            }
+        },
+
+       
+    ]
+}

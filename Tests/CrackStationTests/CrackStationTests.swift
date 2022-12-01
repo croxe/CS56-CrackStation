@@ -4,6 +4,10 @@ import CrackStation
 final class CrackStationTests: XCTestCase {
     /* For SHA1 */
     func testCrackStationPasswordOneDigit() {
+        // Generator:
+        let crackstationG = Generator()
+        let passwodG = crackstationG.decrypt(shaHash: "86f7e437faa5a7fce15d1ddcb9eaeaea377667b8")
+
         // Given
         let crackstation = CrackStation()
 
