@@ -20,19 +20,9 @@ exports.handler = async (event, context) => {
             }
           })
           .promise();
-        body = body.Item;
-        body = JSON.parse(JSON.stringify( body, ["shaHash","password"] , 3))
-        break;
-      case "POST /decrypt":
-        let requestJSON = JSON.parse(event.body);
-        body = await dynamo
-          .get({
-            TableName: "hashedPasswords",
-            Key: {
-              shaHash: requestJSON.shaHash.toUpperCase()
-            }
-          })
-          .promise();
+        if(body.length == 0) {
+          body = "error: "
+        }
         body = body.Item;
         body = JSON.parse(JSON.stringify( body, ["shaHash","password"] , 3))
         break;
@@ -40,8 +30,9 @@ exports.handler = async (event, context) => {
         throw new Error(`Unsupported route: "${event.routeKey}"`);
     }
   } catch (err) {
-    statusCode = 400;
-    body = err.message;
+    statusCode = 404;
+    let response = '{"error":"Password is uncrackable"}'
+    body = JSON.parse(response);
   } finally {
     body = JSON.stringify(body);
   }
