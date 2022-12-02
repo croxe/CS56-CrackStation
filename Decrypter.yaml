@@ -2,13 +2,11 @@ openapi: 3.0.3
 info:
   title: Decrypter as a server
   description: >-
-    Decrypter Server is a server implementation of CrackStation. Current version for Decryter Server is 5.0.1.
+    Decrypter Server is a server implementation of CrackStation. Current version for Decryter Server is 5.0.2.
     You can find out more about CrackStation at [github.com/croxe/CrackStation](https://github.com/croxe/CrackStation). 
     In addition, the implemetation of Decrypter server is the "index.js" in [github.com/croxe/CrackStation](https://github.com/croxe/CrackStation). 
     
     Decrypter Server's API can takes SHA1, SHA256 hash as input, and return the password that corresponded to the hash. By using this API, one can break simple hashed password from 1 to 3 digits length. In addition, one can crack the password that in the combination of Upper case, Lower case letters, numbers, "!", and "?" up to three characters length. For example, "0O!" is crackable for Decrypter Server, and "0aeb" is not crackable, because there is four characters.
-
-
     The input for API can be SH1 or SHA256 as input. For example, "86f7e437faa5a7fce15d1ddcb9eaeaea377667b8" is a valid input, and the API will return the password, "a".
     
     
@@ -25,13 +23,12 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 5.0.1
+  version: 5.0.2
+
 servers:
   - url: https://pdthze5ep1.execute-api.us-west-2.amazonaws.com
 tags:
   - name: password
-    description: Decrypt hashed password
-  - name: decrypt    
     description: Decrypt hashed password
     externalDocs:
       description: Get password from uploaded JSON
@@ -57,12 +54,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
-                  shaHash: 
-                    type: string
-                  password: 
+                  <shaHash>:
                     type: string
         '404':
           description: password is uncrackable
-

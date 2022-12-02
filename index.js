@@ -24,7 +24,8 @@ exports.handler = async (event, context) => {
           body = "error: "
         }
         body = body.Item;
-        body = JSON.parse(JSON.stringify( body, ["shaHash","password"] , 3))
+        let response = '{\"' + body.shaHash + '\":\"' + body.password + '\"}' 
+        body = JSON.parse(response)
         break;
       default:
         throw new Error(`Unsupported route: "${event.routeKey}"`);
