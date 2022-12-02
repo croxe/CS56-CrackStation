@@ -24,6 +24,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 5.0.2
+
 servers:
   - url: https://pdthze5ep1.execute-api.us-west-2.amazonaws.com
 tags:
