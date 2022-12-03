@@ -28,7 +28,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Crypto", package: "swift-crypto")],
 			resources: [
-                .process("Resources/hash.plist")]
+                .copy("Resources/hash.plist")]
 			),
         .testTarget(
             name: "CrackStationTests",
