@@ -28,10 +28,10 @@ let package = Package(
             dependencies: [
                 .product(name: "Crypto", package: "swift-crypto")],
 			resources: [
-                .copy("Resources/hash.plist")]
+                .process("Resources/hash.plist")]
 			),
         .testTarget(
             name: "CrackStationTests",
-            dependencies: ["CrackStation"]),
+            dependencies: ["CrackStation"])
     ]
 )
