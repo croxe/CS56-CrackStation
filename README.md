@@ -10,7 +10,7 @@ Moreover, the CrackStation can crack the password that in the combination of Upp
 
 ### Mission Statement
 
-The purpose is to help people who forget their password to recover the password. This library can decipher salted password that has "!" or "?" being inserted in the password. From Wikipedia Salt page: "In cryptography, a salt is random data that is used as an additional input to a one-way function that hashes data, a password or passphrase." This provides additional benefits to users. 
+The purpose is to help people who forget their password to recover the password. This library can decipher salted password that has "!" or "?" being inserted in the password. From Wikipedia Salt page: "In cryptography, a salt is random data that is used as an additional input to a one-way function that hashes data, a password or passphrase." This provides additional benefits to users, if their password being salted, then this library can still help in some degree. 
 
 
 # Installation
@@ -78,6 +78,3 @@ Change the SHA1 to SHA256, and update all tests. Now decypher() only takes SHA25
 
 The CrackStation now will precomputed the hashes and then read hash dictionary into local disk directly, and each time when the CrackStation inits, it will check the local disk first.
 
-### 4.0.1 (Decrypter as Server)
-
-Now a web version of CrackStation is available. Please refer the Decrypter.yaml for more information.
